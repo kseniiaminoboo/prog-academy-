@@ -1,0 +1,32 @@
+$("input[name='calc']").keyup(function(){
+ $.getJSON( "https://api.coindesk.com/v1/bpi/currentprice/usd.json", 
+    function( data) {
+    var amountInBtc = parseFloat($("input[name='calc']").val());
+    //convert btc to usd
+    var exchangeRate = parseInt(data.bpi.USD.rate_float);
+    var amount = amountInBtc * exchangeRate;
+    $("input[name='rslt']").val(amount);
+    });
+});
+.calculator{
+  display:flex;
+  margin-top: 50px;
+  justify-content: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+
+
+
+    <div class="calculator">
+      <input type="number" name="calc" placeholder="BTC">
+      <div class="arrow" style="margin: 0 10px";>=</div>
+      <input type="number" name="rslt" placeholder="USD">
+    </div>
