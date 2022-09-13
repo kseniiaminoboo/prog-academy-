@@ -1,0 +1,41 @@
+
+console.clear();
+
+let api_url = "https://api.coindesk.com/v1/bpi/currentprice.json";
+
+
+let btc_app = angular.module('btc_app',[]);
+
+btc_app.controller('price', function ($scope){
+	
+
+	function update(round){
+		
+
+		$.getJSON(api_url, function(data){
+			
+			
+			let current_btc = data.bpi.USD.rate_float;
+			//console.log(current_btc);
+
+		
+			$scope.btc = current_btc;
+			
+			$scope.$apply();	
+		});
+	}
+	
+
+	update();
+	
+
+	$scope.update_price = function(){
+		update();
+	};
+});
+
+$("#update").click(function() {
+	$('#title_input').fadeOut(100).fadeIn(100);
+});
+
+$(".focus").focus();
